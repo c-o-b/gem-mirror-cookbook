@@ -1,0 +1,17 @@
+# <%= cookbook_name %>::<%= recipe_name %>
+# 
+
+Alias	/<%= @httpd['urldir'] %>/	/<%= @httpd['aliasdir'].split('/').join('/') %>/public/
+
+<Directory /<%= @httpd['aliasdir'].split('/').join('/') %>/public/>
+  AllowOverride Options
+  options +indexes
+  <IfModule mod_authz_core.c>
+    Require all granted
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order Deny,Allow
+    Deny from All
+    Allow from all
+ </IfModule>
+</Directory>
